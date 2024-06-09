@@ -115,7 +115,7 @@ This property changes the color of the text during the animation. Replace [color
  <p class="animate-[shiny] duration-[2000] infinite-[10] color-[transparent] separate">This text will fade in.</p> 
 ```
 
-###Full CODE
+### Full CODE
 
 ```
 <!DOCTYPE html>
