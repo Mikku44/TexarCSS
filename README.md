@@ -31,15 +31,15 @@ TexarCSS uses a utility-first approach similar to TailwindCSS, making it easy to
 This property specifies the type of animation to apply to a text element. Replace <animation-name> with the desired animation from the list of available animations.
 
 Available Animations:
-   - fade
+   - **fade** _required **color-\[\]**_
 
      ![texarCss - Google Chrome 2567-06-10 01-17-19](https://github.com/Mikku44/TexarCSS/assets/104062911/44f13fc5-4b3b-4647-98d9-d335cb8b57d0)
 
-   - shiny
+   - **shiny**
      
      ![texarCss - Google Chrome 2567-06-10 01-14-42](https://github.com/Mikku44/TexarCSS/assets/104062911/b247b612-6aba-4c33-8760-519bcc93282e)
 
-   - random
+   - **random**
 
      ![texarCss - Google Chrome 2567-06-10 01-19-38](https://github.com/Mikku44/TexarCSS/assets/104062911/0138cfcd-78b4-4607-b093-07269cc76e60)
 
@@ -48,7 +48,7 @@ Available Animations:
 
 ### Example
 ```
- <p class="animate-[fade]">This text will fade in.</p>
+ <p class="animate-[fade] color-[red]">This text will fade in.</p>
  <p class="animate-[random] separate">This text will fade in.</p>
  <p class="animate-[shiny] duration-[2000]  infinite-[10]">This text will fade in.</p> 
 ```
@@ -62,7 +62,7 @@ by default _1000ms_ or _1second_
 ### Example
 
 ```
- <p class="animate-[fade]  duration-[2500]">This text will fade in.</p>
+ <p class="animate-[fade]  duration-[2500] color-[red]">This text will fade in.</p>
  <p class="animate-[random]  duration-[4500] separate">This text will fade in.</p>
  <p class="animate-[shiny] duration-[2000] infinite-[10]">This text will fade in.</p> 
 ```
@@ -76,9 +76,9 @@ This property indicates that each character of the text should be animated separ
 
 
 ```
- <p class="animate-[fade]  duration-[2500] separate">This text will fade in.</p>
- <p class="animate-[random]  duration-[4500] separate">This text will fade in.</p>
- <p class="animate-[shiny] duration-[2000] infinite-[10] separate">This text will fade in.</p> 
+ <p class="animate-[fade]  duration-[2500] color-[red] separate">This text will fade in.</p>
+ <p class="animate-[random]  duration-[4500] color-[red] separate">This text will fade in.</p>
+ <p class="animate-[shiny] duration-[2000] color-[red] infinite-[10] separate">This text will fade in.</p> 
 
 ```
 
@@ -96,7 +96,7 @@ by default **Infinity**
 
 
 ```
- <p class="animate-[fade]  duration-[2500] separate">This text will fade in.</p>
+ <p class="animate-[fade]  duration-[2500] color-[red] separate">This text will fade in.</p>
  <p class="animate-[random]  duration-[4500] infinite-[1] separate">This text will fade in.</p>
  <p class="animate-[shiny] duration-[2000] infinite-[10] separate">This text will fade in.</p> 
 ```
