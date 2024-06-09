@@ -115,4 +115,53 @@ This property changes the color of the text during the animation. Replace [color
  <p class="animate-[shiny] duration-[2000] infinite-[10] color-[transparent] separate">This text will fade in.</p> 
 ```
 
+###Full CODE
+
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>texarCss</title>
+    <script src="texarcss.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+        body {
+            font-family: "Bebas Neue", sans-serif;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vmin - 20px);
+        }
+
+        h1 {
+            font-size: 56px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1 class="animate-[random] duration-[2000] separate  color-[black]" style="color:rgb(233, 166, 22);">
+        TexarCSS
+    </h1>
+    <h1 class="animate-[shiny] duration-[2000] separate  color-[black]" style="color:rgb(233, 166, 22);">
+        TexarCSS
+    </h1>
+    <h1 class="animate-[fade] duration-[2000] separate  color-[black]" style="color:rgb(233, 166, 22);">
+        TexarCSS
+    </h1>
+
+
+</body>
+
+</html>
+
+```
 
