@@ -21,146 +21,102 @@
 
 
 */
-
 let fade = [
-    {
-
-        opacity: 1,
-        offset: 0,
-    },
-    {
-        offset: 0.75,
-    },
-
+    { opacity: 1, offset: 0 },
+    { offset: 0.75 }
 ];
 
 let shiny = [
-    {
-
-        opacity: 0.3,
-        offset: 0.25,
-    }
-    ,
-    {
-        opacity: 1,
-        offset: 0.75,
-    }
-]
-
+    { opacity: 0.3, offset: 0.25 },
+    { opacity: 1, offset: 0.75 }
+];
 
 let random = [
-    {
+    { opacity: 0.0, offset: 0.0 },
+    { opacity: 0.35, offset: 0.25 },
+    { opacity: 0.1, offset: 0.5 },
+    { opacity: 1, offset: 0.75 }
+];
 
-        opacity: 0.0,
-        offset: 0.0,
-    },
-    {
-
-        opacity: 0.35,
-        offset: 0.25,
-    },
-    {
-
-        opacity: 0.1,
-        offset: 0.5,
-    },
-    {
-        opacity: 1,
-        offset: 0.75,
-    }
-]
-
+let type = [
+    {}
+];
 
 let animationsDict = {
     "fade": fade,
     "shiny": shiny,
     "random": random,
-}
-
-
+    "type": type
+};
 
 let durationDict = {
     "fade": true,
     "shiny": true,
     "random": false,
-}
+    "type": true
+};
 
 function slideDuration({ index, duration, len }) {
-    let animationDuration = duration - (len - index) * duration / 100;
-    return animationDuration; // ms
+    // return duration - (len - index)%50 * duration / 100;
+    return 10*index + duration
 }
 
-function randomDuration({ index, duration, len }) {
-    let animationDuration = duration - getRandomInt(9)*100;
-    console.log(animationDuration);
-    return animationDuration; // ms
+function randomDuration({ duration }) {
+    return duration - getRandomInt(9) * 100;
 }
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
-document.addEventListener("DOMContentLoaded", (e) => {
-    // var animationStyleSheet = document.createElement("link");
-    // animationStyleSheet.setAttribute("rel", "stylesheet");
-    // animationStyleSheet.setAttribute("href", "animations.css");
-    // document.head.appendChild(animationStyleSheet);
+document.addEventListener("DOMContentLoaded", () => {
+    const regex = /animate-\[([^\]]+)\]/;
+    const regexType = /separate/;
+    const regexDuration = /duration-\[([^\]]+)\]/;
+    const regexInfinite = /infinite-\[([^\]]+)\]/;
+    const regexColor = /color-\[([^\]]+)\]/;
 
-    var targets = document.querySelectorAll('*');
-    // console.log(targets);
+    document.querySelectorAll('*').forEach(target => {
+        let text = target.textContent;
+        const className = target.className;
 
-    targets.forEach(target => {
-        let text = [...target.textContent];
-        text = text.join("", "");
-        const regex = /animate-\[([^\]]+)\]/;
-        const regexType = /separate/;
-        const regexDuration = /duration-\[([^\]]+)\]/;
-        const regexInfinite = /infinite-\[([^\]]+)\]/;
-        const regexColor = /color-\[([^\]]+)\]/;
-
-        const matches = target.className.match(regex);
-        const matchesType = target.className.match(regexType);
-        const matchesDuration = target.className.match(regexDuration);
-        const matchesInfinite = target.className.match(regexInfinite);
-        const matchesColor = target.className.match(regexColor);
+        const matches = className.match(regex);
+        const matchesType = className.match(regexType);
+        const matchesDuration = className.match(regexDuration);
+        const matchesInfinite = className.match(regexInfinite);
+        const matchesColor = className.match(regexColor);
 
         if (matches) {
+            let animation = animationsDict[matches[1]];
+            let duration = matchesDuration ? parseInt(matchesDuration[1]) : 1000;
+            let iterations = matchesInfinite ? parseInt(matchesInfinite[1]) : Infinity;
+            let color = matchesColor ? matchesColor[1] : "none";
 
             if (!matchesType) {
-                if (matchesColor != null) animationsDict[matches[1]][0]["color"] = matchesColor[1];
-                target.animate(animationsDict[matches[1]], { duration: matchesDuration ? parseInt(matchesDuration[1]) : 1000, iterations: matchesInfinite ? parseInt(matchesInfinite[1]) : Infinity });
-                console.log(matches[1]);
-
-
+                animation[0]["color"] = color;
+                target.animate(animation, { duration, iterations });
             } else {
-                target.innerHTML = "";
-                console.log(text);
-                for (let index = 0; index < text.length; index += 1) {
-                    // console.log(text[index]);
-                    if (text[index] === " " || text[index] === "\n") {
-                        if (text[index - 1] === " " || text[index] === "\n") continue;
-                        target.innerHTML += "&nbsp";
-                        continue;
-                    }
-
+                let fragment = document.createDocumentFragment();
+                for (let i = 0; i < text.length; i++) {
+                    if (text[i] === " " && text[i - 1] === " ") continue; // Skip double spaces
                     let span = document.createElement("span");
-                    span.innerHTML = text[index];
-                    target.appendChild(span);
-
-
-                    // target.innerHTML += `<span style="animation: ${matches[1]} ${index}s ${matchesInfinite ? parseInt(matchesInfinite[1]) : "infinite"};">${text[index]}</span>`;
-
-
+                    span.textContent = text[i] === " " ? "\u00A0" : text[i];
+                    fragment.appendChild(span);
                 }
-                // console.log(target.children);
-                for (let index = 0; index < target.children.length; index++) {
-                    if (matchesColor != null) animationsDict[matches[1]][0]["color"] = matchesColor[1];
-                    target.children[index].animate(animationsDict[matches[1]], { duration: matchesDuration ? durationDict[matches[1]] ? slideDuration({ index: index, duration: parseInt(matchesDuration[1]), len: target.children.length }) : randomDuration({ index: index, duration: parseInt(matchesDuration[1]), len: target.children.length }) : 1000, iterations: matchesInfinite ? parseInt(matchesInfinite[1]) : Infinity });
-                }
+                target.innerHTML = "";
+                target.appendChild(fragment);
 
+                Array.from(target.children).forEach((child, index) => {
+                    
+                    animation[0]["color"] = color;
+                    let animDuration = durationDict[matches[1]]
+                        ? slideDuration({ index, duration, len: target.children.length })
+                        : randomDuration({ duration });
+                    // console.log(animDuration)
+                    child.animate(animation, { duration: animDuration, iterations });
+                });
             }
         }
-    })
-})
-
+    });
+});
 
