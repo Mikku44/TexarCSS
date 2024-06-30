@@ -52,7 +52,7 @@ Available Animations:
  <p class="animate-[fade] color-[red]">This text will fade in.</p>
  <p class="animate-[random] separate">This text will fade in.</p>
  <p class="animate-[shiny] duration-[2000]  infinite-[10]">This text will fade in.</p>
- <p class="animate-[type] duration-[2000]  infinite-[10]">This text will fade in.</p> 
+  <p class="animate-[type] duration-[2000] separate color-[transparent]  infinite-[10]">This text will fade in.</p> 
 ```
 
 
