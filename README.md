@@ -44,6 +44,8 @@ Available Animations:
      ![texarCss - Google Chrome 2567-06-10 01-19-38](https://github.com/Mikku44/TexarCSS/assets/104062911/0138cfcd-78b4-4607-b093-07269cc76e60)
 
    - **type**
+   - **scale**
+   - **wave**
 
 
 
