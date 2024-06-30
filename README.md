@@ -43,6 +43,7 @@ Available Animations:
 
      ![texarCss - Google Chrome 2567-06-10 01-19-38](https://github.com/Mikku44/TexarCSS/assets/104062911/0138cfcd-78b4-4607-b093-07269cc76e60)
 
+   - **type**
 
 
 
@@ -50,7 +51,8 @@ Available Animations:
 ```
  <p class="animate-[fade] color-[red]">This text will fade in.</p>
  <p class="animate-[random] separate">This text will fade in.</p>
- <p class="animate-[shiny] duration-[2000]  infinite-[10]">This text will fade in.</p> 
+ <p class="animate-[shiny] duration-[2000]  infinite-[10]">This text will fade in.</p>
+ <p class="animate-[type] duration-[2000]  infinite-[10]">This text will fade in.</p> 
 ```
 
 
