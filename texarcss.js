@@ -39,21 +39,38 @@ let random = [
 ];
 
 let type = [
-    {}
+
+ 
+];
+let scale = [
+    { transform: 'scale(0)' },   
+    { transform: ' scale(1.2,1.2)' }, 
+    { transform: ' scale(0.9,0.9)' }, 
+    {  transform: 'scale(1,1)' }  
+];
+let wave = [
+    { transform: 'translateY(0)' },   
+    { transform: 'translateY(-10px)' }, 
+    { transform: 'translateY(2px)' },  
+    {  transform: 'translateY(0)' }  
 ];
 
 let animationsDict = {
     "fade": fade,
     "shiny": shiny,
     "random": random,
-    "type": type
+    "type": type,
+    "wave": wave,
+    "scale": scale,
 };
 
 let durationDict = {
     "fade": true,
     "shiny": true,
     "random": false,
-    "type": true
+    "type": true,
+    "wave": true,
+    "scale": true,
 };
 
 function slideDuration({ index, duration, len }) {
