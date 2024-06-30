@@ -92,6 +92,9 @@ document.addEventListener("DOMContentLoaded", () => {
             let iterations = matchesInfinite ? parseInt(matchesInfinite[1]) : Infinity;
             let color = matchesColor ? matchesColor[1] : "none";
 
+            target.style.display = "flex";
+            target.style.flexWrap = "wrap";
+
             if (!matchesType) {
                 animation[0]["color"] = color;
                 target.animate(animation, { duration, iterations });
