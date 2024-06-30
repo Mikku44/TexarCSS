@@ -68,7 +68,13 @@ by default _1000ms_ or _1second_
 ```
  <p class="animate-[fade]  duration-[2500] color-[red]">This text will fade in.</p>
  <p class="animate-[random]  duration-[4500] separate">This text will fade in.</p>
- <p class="animate-[shiny] duration-[2000] infinite-[10]">This text will fade in.</p> 
+ <p class="animate-[shiny] duration-[2000] infinite-[10]">This text will fade in.</p>
+  <h1 class="animate-[wave] duration-[700] separate" style="color:rgb(233, 166, 22);">
+        TexarCSS
+    </h1>
+    <h1 class="animate-[scale] duration-[700] separate" style="color:rgb(233, 166, 22);">
+        TexarCSS
+    </h1>
 ```
 
 **3.separate**
