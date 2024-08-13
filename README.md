@@ -4,11 +4,29 @@
 
 TexarCSS is a dynamic and powerful CSS library designed to bring text animations to HTML with the simplicity and elegance reminiscent of TailwindCSS.
 
-## Intallation
+## Intallation 
+
+### with CDN
 Download **texarCSS.js** [link](https://raw.githubusercontent.com/Mikku44/TexarCSS/main/texarcss.js) in your project & add the script to your HTML
+
 ```
  <script src="texarcss.js"></script>
+  <script>
+      
+        applyAnimations();
+  </script>
 ```
+
+### with NPM
+```
+   npm i texarcss
+```
+then you need to import **applyAnimations** in your project
+```
+  import { applyAnimations } from 'texarcss'
+
+```
+in the page you must call **applyAnimations()** to let it work
 
 ## Getting Started
 ### Key Properties
