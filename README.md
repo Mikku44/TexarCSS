@@ -155,7 +155,10 @@ This property changes the color of the text during the animation. Replace [color
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>texarCss</title>
     <script src="texarcss.js"></script>
-
+ <script>
+      
+        applyAnimations();
+  </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
