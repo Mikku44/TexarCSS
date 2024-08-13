@@ -64,6 +64,7 @@ Available Animations:
    - **type**
    - **scale**
    - **wave**
+   - **blur**
 
 
 
