@@ -21,6 +21,7 @@
 
 
 */
+
 let fade = [
     { opacity: 1, offset: 0 },
     { offset: 0.75 }
@@ -39,20 +40,28 @@ let random = [
 ];
 
 let type = [
-
- 
+    {}
 ];
 let scale = [
-    { transform: 'scale(0)' },   
-    { transform: ' scale(1.2,1.2)' }, 
-    { transform: ' scale(0.9,0.9)' }, 
-    {  transform: 'scale(1,1)' }  
+    { transform: 'scale(0)' },
+    { transform: ' scale(1.2,1.2)' },
+    { transform: ' scale(0.9,0.9)' },
+    { transform: 'scale(1,1)' },
+    { transform: 'scale(0)' },
 ];
+let blura = [
+    { opacity: 0.0, filter: 'blur(0px)', offset: 0.0 },
+    { opacity: 0.35, filter: 'blur(2px)', offset: 0.25 },
+    { opacity: 0.1, filter: 'blur(5px)', offset: 0.5 },
+    { opacity: 1, filter: 'blur(0px)', offset: 0.75 },
+    { opacity: 0.0, filter: 'blur(0px)', offset: 1.0 },
+];
+
 let wave = [
-    { transform: 'translateY(0)' },   
-    { transform: 'translateY(-10px)' }, 
-    { transform: 'translateY(2px)' },  
-    {  transform: 'translateY(0)' }  
+    { transform: 'translateY(0)' },
+    { transform: 'translateY(-10px)' },
+    { transform: 'translateY(2px)' },
+    { transform: 'translateY(0)' }
 ];
 
 let animationsDict = {
@@ -62,6 +71,7 @@ let animationsDict = {
     "type": type,
     "wave": wave,
     "scale": scale,
+    "blur": blura,
 };
 
 let durationDict = {
@@ -71,11 +81,11 @@ let durationDict = {
     "type": true,
     "wave": true,
     "scale": true,
+    "blur": true,
 };
 
 function slideDuration({ index, duration, len }) {
-    // return duration - (len - index)%50 * duration / 100;
-    return 10*index + duration
+    return 10 * index + duration;
 }
 
 function randomDuration({ duration }) {
@@ -86,57 +96,67 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const regex = /animate-\[([^\]]+)\]/;
-    const regexType = /separate/;
-    const regexDuration = /duration-\[([^\]]+)\]/;
-    const regexInfinite = /infinite-\[([^\]]+)\]/;
-    const regexColor = /color-\[([^\]]+)\]/;
+function applyAnimations() {
+    document.addEventListener("DOMContentLoaded", () => {
+        const regex = /animate-\[([^\]]+)\]/;
+        const regexType = /separate/;
+        const regexDuration = /duration-\[([^\]]+)\]/;
+        const regexInfinite = /infinite-\[([^\]]+)\]/;
+        const regexColor = /color-\[([^\]]+)\]/;
 
-    document.querySelectorAll('*').forEach(target => {
-        let text = target.textContent;
-        const className = target.className;
+        document.querySelectorAll('*').forEach(target => {
+            let text = target.textContent;
+            const className = target.className;
 
-        const matches = className.match(regex);
-        const matchesType = className.match(regexType);
-        const matchesDuration = className.match(regexDuration);
-        const matchesInfinite = className.match(regexInfinite);
-        const matchesColor = className.match(regexColor);
+            const matches = className.match(regex);
+            const matchesType = className.match(regexType);
+            const matchesDuration = className.match(regexDuration);
+            const matchesInfinite = className.match(regexInfinite);
+            const matchesColor = className.match(regexColor);
 
-        if (matches) {
-            let animation = animationsDict[matches[1]];
-            let duration = matchesDuration ? parseInt(matchesDuration[1]) : 1000;
-            let iterations = matchesInfinite ? parseInt(matchesInfinite[1]) : Infinity;
-            let color = matchesColor ? matchesColor[1] : "none";
+            if (matches) {
+                let animation = animationsDict[matches[1]];
+                let duration = matchesDuration ? parseInt(matchesDuration[1]) : 1000;
+                let iterations = matchesInfinite ? parseInt(matchesInfinite[1]) : Infinity;
+                let color = matchesColor ? matchesColor[1] : "none";
 
-            target.style.display = "flex";
-            target.style.flexWrap = "wrap";
+                target.style.display = "flex";
+                target.style.flexWrap = "wrap";
 
-            if (!matchesType) {
-                animation[0]["color"] = color;
-                target.animate(animation, { duration, iterations });
-            } else {
-                let fragment = document.createDocumentFragment();
-                for (let i = 0; i < text.length; i++) {
-                    if (text[i] === " " && text[i - 1] === " ") continue; // Skip double spaces
-                    let span = document.createElement("span");
-                    span.textContent = text[i] === " " ? "\u00A0" : text[i];
-                    fragment.appendChild(span);
-                }
-                target.innerHTML = "";
-                target.appendChild(fragment);
-
-                Array.from(target.children).forEach((child, index) => {
-                    
+                if (!matchesType) {
                     animation[0]["color"] = color;
-                    let animDuration = durationDict[matches[1]]
-                        ? slideDuration({ index, duration, len: target.children.length })
-                        : randomDuration({ duration });
-                    // console.log(animDuration)
-                    child.animate(animation, { duration: animDuration, iterations });
-                });
+                    target.animate(animation, { duration, iterations });
+                } else {
+                    let fragment = document.createDocumentFragment();
+                    for (let i = 0; i < text.length; i++) {
+                        if (text[i] === " " && text[i - 1] === " ") continue;
+                        let span = document.createElement("span");
+                        span.textContent = text[i] === " " ? "\u00A0" : text[i];
+                        fragment.appendChild(span);
+                    }
+                    target.innerHTML = "";
+                    target.appendChild(fragment);
+
+                    Array.from(target.children).forEach((child, index) => {
+                        animation[0]["color"] = color;
+                        let animDuration = durationDict[matches[1]]
+                            ? slideDuration({ index, duration, len: target.children.length })
+                            : randomDuration({ duration });
+                        child.animate(animation, { duration: animDuration, iterations });
+                    });
+                }
             }
-        }
+        });
     });
-});
+}
+
+// Export functions and objects
+export {
+    animationsDict,
+    durationDict,
+    slideDuration,
+    randomDuration,
+    getRandomInt,
+    applyAnimations
+};
 
